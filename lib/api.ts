@@ -16,12 +16,7 @@ const api = axios.create({
     Authorization: `Bearer ${apiKey}`,
   },
 });
-api.interceptors.request.use(config => {
-  const fullUrl = `${config.baseURL}${config.url}`;
-  const queryString = new URLSearchParams(config.params).toString();
-  console.log(`[Axios Request] ${fullUrl}?${queryString}`);
-  return config;
-});
+
 export async function fetchNotes(
   searchText: string,
   pageNumber: number,

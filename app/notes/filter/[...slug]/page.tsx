@@ -9,7 +9,7 @@ type Props = {
 export default async function Page({ params }: Props) {
   const { slug } = await params;
 
-  const tag = slug.join('');
+  const tag = slug[0];
   const normalizedTag = tag === 'All' ? undefined : tag;
 
   const data: Response = await fetchNotes('', 1, normalizedTag);

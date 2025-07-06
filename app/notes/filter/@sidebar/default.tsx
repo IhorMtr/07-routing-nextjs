@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import css from './SidebarNotes.module.css';
-import { tag } from '@/types/tag';
+import { tags } from '@/types/tags';
 export default function Sidebar() {
   return (
     <ul className={css.menuList}>
-      {tag.map(tag => {
+      <Link href={`/notes/filter/All`} className={css.menuLink}>
+        All
+      </Link>
+      {tags.map(tag => {
         return (
           <li className={css.menuItem} key={tag}>
             <Link href={`/notes/filter/${tag}`} className={css.menuLink}>

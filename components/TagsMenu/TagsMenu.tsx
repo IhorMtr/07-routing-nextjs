@@ -1,5 +1,5 @@
 'use client';
-import { tag } from '@/types/tag';
+import { tags } from '@/types/tags';
 import css from './TagsMenu.module.css';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -11,6 +11,10 @@ export default function TagsMenu() {
     setIsTagListOpened(prev => !prev);
   }
 
+  function handleCloseMenu() {
+    setIsTagListOpened(false);
+  }
+
   return (
     <div className={css.menuContainer}>
       <button className={css.menuButton} onClick={handleOpener}>
@@ -18,15 +22,26 @@ export default function TagsMenu() {
       </button>
       {isTagListOpened && (
         <ul className={css.menuList}>
-          {tag.map(tag => {
-            return (
-              <li className={css.menuItem} key={tag}>
-                <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
-                  {tag}
-                </Link>
-              </li>
-            );
-          })}
+          <li className={css.menuItem}>
+            <Link
+              href={`/notes/filter/All`}
+              className={css.menuLink}
+              onClick={handleCloseMenu}
+            >
+              All
+            </Link>
+          </li>
+          {tags.map(tagItem => (
+            <li className={css.menuItem} key={tagItem}>
+              <Link
+                href={`/notes/filter/${tagItem}`}
+                className={css.menuLink}
+                onClick={handleCloseMenu}
+              >
+                {tagItem}
+              </Link>
+            </li>
+          ))}
         </ul>
       )}
     </div>
