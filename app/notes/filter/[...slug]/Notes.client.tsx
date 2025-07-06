@@ -7,9 +7,10 @@ import { Toaster } from 'react-hot-toast';
 import { useDebounce } from 'use-debounce';
 import NoteList from '@/components/NoteList/NoteList';
 import Pagination from '@/components/Pagination/Pagination';
-import NoteModal from '@/components/NoteModal/NoteModal';
+import Modal from '@/components/Modal/Modal';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import type { Response } from '@/types/response';
+import NoteForm from '@/components/NoteForm/NoteForm';
 
 type NotesProps = {
   initialData: Response;
@@ -47,6 +48,10 @@ export default function Notes({ initialData, tag }: NotesProps) {
     setCurrentPage(1);
   }
 
+  function toggleModal() {
+    setIsModalOpened(!isModalOpened);
+  }
+
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
@@ -62,7 +67,11 @@ export default function Notes({ initialData, tag }: NotesProps) {
           Create note +
         </button>
       </header>
-      {isModalOpened && <NoteModal onClose={() => setIsModalOpened(false)} />}
+      {isModalOpened && (
+        <Modal onClose={toggleModal}>
+          <NoteForm onClose={toggleModal} />
+        </Modal>
+      )}
       {data && data.notes.length !== 0 && <NoteList notes={data.notes} />}
       <Toaster />
     </div>

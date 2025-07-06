@@ -1,10 +1,8 @@
 'use client';
-import { Tag } from '@/types/tag';
+import { tag } from '@/types/tag';
 import css from './TagsMenu.module.css';
 import Link from 'next/link';
 import { useState } from 'react';
-
-const tags: Tag[] = ['All', 'Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
 export default function TagsMenu() {
   const [isTagListOpened, setIsTagListOpened] = useState(false);
@@ -20,7 +18,7 @@ export default function TagsMenu() {
       </button>
       {isTagListOpened && (
         <ul className={css.menuList}>
-          {tags.map(tag => {
+          {tag.map(tag => {
             return (
               <li className={css.menuItem} key={tag}>
                 <Link href={`/notes/filter/${tag}`} className={css.menuLink}>

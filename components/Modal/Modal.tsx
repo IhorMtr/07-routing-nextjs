@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import css from './NoteModal.module.css';
-import NoteForm from '../NoteForm/NoteForm';
+import css from './Modal.module.css';
 import { createPortal } from 'react-dom';
 
-interface NoteModalProps {
+interface Modal {
   onClose: () => void;
+  children: React.ReactNode;
 }
 
-export default function NoteModal({ onClose }: NoteModalProps) {
+export default function Modal({ onClose, children }: Modal) {
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -43,9 +43,7 @@ export default function NoteModal({ onClose }: NoteModalProps) {
       aria-modal="true"
       onClick={handleClickCloser}
     >
-      <div className={css.modal}>
-        <NoteForm onClose={onClose} />
-      </div>
+      <div className={css.modal}>{children}</div>
     </div>
   );
 
