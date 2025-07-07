@@ -4,9 +4,11 @@ import { tags } from '@/types/tags';
 export default function Sidebar() {
   return (
     <ul className={css.menuList}>
-      <Link href={`/notes/filter/All`} className={css.menuLink}>
-        All
-      </Link>
+      <li className={css.menuItem}>
+        <Link href={`/notes/filter/All`} className={css.menuLink}>
+          All
+        </Link>
+      </li>
       {tags.map(tag => {
         return (
           <li className={css.menuItem} key={tag}>
